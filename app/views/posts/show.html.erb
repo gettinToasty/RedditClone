@@ -1,0 +1,16 @@
+<h1><%= @post.title %></h1>
+
+<% unless @post.url == "" %>
+  <%= link_to "URL", @post.url %>
+<% end %>
+
+<br>
+
+<p><%= @post.content %></p>
+<br>
+<% if current_user == @post.author || current_user == @post.moderator %>
+  <%= link_to "Edit Post", edit_post_url(@post) %>
+<% end %>
+
+<br>
+<%= link_to "Back to sub", sub_url(@post.sub) %>

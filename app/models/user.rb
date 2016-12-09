@@ -10,6 +10,10 @@ class User < ApplicationRecord
     primary_key: :id,
     class_name: :sub
 
+  has_many :modded_posts,
+    through: :subs,
+    source: :posts
+
   has_many :posts,
     foreign_key: :author_id,
     class_name: :Post

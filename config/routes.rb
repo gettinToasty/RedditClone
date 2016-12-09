@@ -4,11 +4,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :show, :create]
 
-  resources :posts, except: :index
+  resources :posts, except: [:index, :new, :create]
 
   root "subs#index"
 
-  resources :subs
+  resources :subs do
+    resources :posts, only: [:new, :create]
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

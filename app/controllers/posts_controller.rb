@@ -12,6 +12,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.author_id = current_user.id
+    @post.sub_id = params[:sub_id]
     if @post.save
       redirect_to post_url(@post)
     else
@@ -49,8 +51,7 @@ class PostsController < ApplicationController
 
   def is_author_or_mod
     @post = Post.find(params[:id])
-    @sub = @post.sub
-    unless current_user == @post.author || current_user == @sub.moderator
+    unless current_user == @post.author || current_user == @post.moderator
       flash[:errors] = ["Not permitted"]
       redirect_to post_url(@post)
     end
