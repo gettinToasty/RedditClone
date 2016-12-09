@@ -9,6 +9,16 @@
   </head>
 
   <body>
+    <header>
+      <% if current_user %>
+        <%= button_to "Log out", session_url(current_user), method: :delete %>
+      <% else %>
+        <%= link_to "Log in", new_session_url %>
+        <%= link_to "Register", new_user_url %>
+      <% end %>
+    </header>
+
+
     <%= yield %>
   </body>
 </html>

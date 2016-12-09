@@ -1,0 +1,17 @@
+<h1>Edit sub</h1>
+
+<form class="" action="<%= sub_url(@sub) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= auth_token %>
+
+  <label for="title">Title:</label>
+  <input id="title" type="text" name="sub[title]" value="<%= @sub.title %>">
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="sub[description]" rows="8" cols="80">
+    <%= @sub.description %>
+  </textarea>
+
+  <input type="submit" name="" value="Edit sub">
+</form>
+  <%= button_to 'Delete sub', sub_url(@sub), method: :delete %>
