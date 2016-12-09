@@ -1,6 +1,6 @@
 <h1>Create a post</h1>
 
-<form action="<%= sub_posts_url(params[:sub_id]) %>" method="post">
+<form action="<%= posts_url %>" method="post">
   <%= auth_token %>
 
   <label for="title">Title:</label>
@@ -15,9 +15,24 @@
   <textarea name="post[content]" rows="8" cols="80" id="content"></textarea>
   <br>
 
+
+
+  <label>Subreddits:</label><br>
+  <% @subs.each do |sub| %>
+    <label>
+      <input type="checkbox"
+             name="post[sub_ids][]"
+             value="<%= sub.id %>"
+             <%= "checked" if sub.id == params[:sub_id].to_i %> >
+      <%= sub.title %>
+    </label><br>
+  <% end %>
+  <br>
+
   <input type="submit" value="Save Post">
 
 </form>
 
 <br>
-<%= link_to "Back to sub", sub_url(params[:sub_id]) %>
+
+<%= link_to "Back to index", root_url %>

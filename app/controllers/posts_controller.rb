@@ -7,14 +7,14 @@ class PostsController < ApplicationController
   end
 
   def new
-
+    @subs = Sub.all
   end
 
   def create
+    @subs = Sub.all
     @post = Post.new(post_params)
     @post.author_id = current_user.id
-    @post.sub_id = params[:sub_id]
-    if @post.save
+    if @post.save!
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @subs = Sub.all
     @post = Post.find(params[:id])
   end
 
@@ -38,15 +39,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @sub = @post.sub
     @post.destroy
-    redirect_to sub_url(@sub)
+    redirect_to root_url
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :content)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
 
   def is_author_or_mod

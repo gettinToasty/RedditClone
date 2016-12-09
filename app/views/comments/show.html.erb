@@ -1,0 +1,6 @@
+<h1><%= @comment.author.username %></h1>
+
+<p><%= @comment.content %></p>
+<p>Posted at:<%= @comment.created_at %></p>
+
+<%= render "layouts/comment", comment: @comment %>

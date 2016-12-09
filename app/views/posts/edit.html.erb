@@ -17,6 +17,18 @@
   <textarea name="post[content]" rows="8" cols="80" id="content"><%= @post.content %></textarea>
   <br>
 
+  <label>Subreddits:</label><br>
+  <% @subs.each do |sub| %>
+    <label>
+      <input type="checkbox"
+             name="post[sub_ids][]"
+             value="<%= sub.id %>"
+             <%= "checked" if @post.subs.include?(sub)  %> >
+      <%= sub.title %>
+    </label><br>
+  <% end %>
+  <br>
+
   <input type="submit" value="Edit Post">
 
 </form>

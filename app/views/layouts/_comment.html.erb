@@ -1,0 +1,18 @@
+
+<form class="" action="<%= post_comments_url(comment.post_id) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="comment[parent_id]" value="<%= comment.id %>">
+
+  <label for="content">Content:</label><br>
+  <textarea id="content" name="comment[content]" rows="4" cols="40"></textarea><br>
+
+  <input type="submit" name="" value="Add comment">
+
+</form>
+
+<% comment.child_comments.each do |child_comment| %>
+  <ul><h4>User: <%= child_comment.author.username %></h4>
+  <p><%= child_comment.content %></p>
+  <p>Posted at:<%= child_comment.created_at %></p>
+  <%= render "layouts/comment", comment: child_comment %></ul>
+<% end %>

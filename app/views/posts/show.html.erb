@@ -12,5 +12,19 @@
   <%= link_to "Edit Post", edit_post_url(@post) %>
 <% end %>
 
+<br><br>
+
+<% @post.subs.each do |sub| %>
+  <%= link_to "Back to #{sub.title}", sub_url(sub) %><br>
+<% end %>
+
 <br>
-<%= link_to "Back to sub", sub_url(@post.sub) %>
+  <%= link_to "Add comment", new_post_comment_url(@post) %>
+<br>
+
+<% @post.comments.where(parent_id: nil).includes(:author).each do |comment| %>
+  <h4>User: <%= comment.author.username %></h4>
+  <p><%= comment.content %></p>
+  <p>Posted at:<%= comment.created_at %></p>
+  <%= render "layouts/comment", comment: comment %>
+<% end %>
