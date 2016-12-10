@@ -10,9 +10,9 @@
 
 </form>
 
-<% comment.child_comments.each do |child_comment| %>
+<% all_comments[comment.id].each do |child_comment| %>
   <ul><h4>User: <%= child_comment.author.username %></h4>
   <p><%= child_comment.content %></p>
   <p>Posted at:<%= child_comment.created_at %></p>
-  <%= render "layouts/comment", comment: child_comment %></ul>
+  <%= render "layouts/comment", comment: child_comment, all_comments: all_comments %></ul>
 <% end %>

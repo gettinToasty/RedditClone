@@ -22,9 +22,9 @@
   <%= link_to "Add comment", new_post_comment_url(@post) %>
 <br>
 
-<% @post.comments.where(parent_id: nil).includes(:author).each do |comment| %>
+<% @all_comments[nil].each do |comment| %>
   <h4>User: <%= comment.author.username %></h4>
   <p><%= comment.content %></p>
   <p>Posted at:<%= comment.created_at %></p>
-  <%= render "layouts/comment", comment: comment %>
+  <%= render "layouts/comment", comment: comment, all_comments: @all_comments %>
 <% end %>
