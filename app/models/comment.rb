@@ -10,4 +10,7 @@ class Comment < ApplicationRecord
   has_many :child_comments,
     foreign_key: :parent_id,
     class_name: :Comment
+
+  has_many :votes, as: :votable
+  
 end

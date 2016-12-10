@@ -19,6 +19,8 @@ class Post < ApplicationRecord
   has_many :comments,
     dependent: :destroy
 
+  has_many :votes, as: :votable
+
   def comments_by_parent_id
     hash = Hash.new { |h, k| h[k] = [] }
     Comment.where(post_id: self.id).each do |comment|

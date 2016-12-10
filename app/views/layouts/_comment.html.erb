@@ -12,6 +12,11 @@
 
 <% all_comments[comment.id].each do |child_comment| %>
   <ul><h4>User: <%= child_comment.author.username %></h4>
+
+  <p>Score: <%= comment.votes.sum(:value) %></p>
+  <%= button_to "Upvote", comment_upvote_url(comment), method: :post %>
+  <%= button_to "Downvote", comment_downvote_url(comment), method: :post %>
+
   <p><%= child_comment.content %></p>
   <p>Posted at:<%= child_comment.created_at %></p>
   <%= render "layouts/comment", comment: child_comment, all_comments: all_comments %></ul>

@@ -1,6 +1,10 @@
 <h1><%= @comment.author.username %></h1>
 
+<p>Score: <%= @votes %></p>
+<%= button_to "Upvote", comment_upvote_url(@comment), method: :post %>
+<%= button_to "Downvote", comment_downvote_url(@comment), method: :post %>
+
 <p><%= @comment.content %></p>
 <p>Posted at:<%= @comment.created_at %></p>
 
-<%= render "layouts/comment", comment: @comment %>
+<%= render "layouts/comment", comment: @comment, all_comments: @all_comments %>

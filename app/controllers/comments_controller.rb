@@ -1,10 +1,14 @@
 class CommentsController < ApplicationController
+
   def new
 
   end
 
   def show
     @comment = Comment.find(params[:id])
+    @post = Post.find(@comment.post_id)
+    @all_comments = @post.comments_by_parent_id
+    @votes = Vote.where(votable_id: params[:id], votable_type: Comment).sum(:value)
   end
 
   def create
@@ -18,6 +22,18 @@ class CommentsController < ApplicationController
       flash.now[:errors] = @comment.errors.full_messages
       render :new
     end
+  end
+
+  def upvote
+    @comment = Comment.find(params[:id])
+    Vote.create(value: 1, votable_id: @comment.id, votable_type: Comment)
+    redirect_to comment_url(@comment)
+  end
+
+  def downvote
+    @comment = Comment.find(params[:id])
+    Vote.create(value: -1, votable_id: @comment.id, votable_type: Comment)
+    redirect_to comment_url(@comment)
   end
 
   private

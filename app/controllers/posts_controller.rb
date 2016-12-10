@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @all_comments = @post.comments_by_parent_id
+    @votes = Vote.where(votable_id: params[:id], votable_type: Post).sum(:value)
   end
 
   def new
@@ -42,6 +43,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to root_url
+  end
+
+  def upvote
+    @post = Post.find(params[:id])
+    Vote.create(value: 1, votable_id: @post.id, votable_type: Post)
+    redirect_to post_url(@post)
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    Vote.create(value: -1, votable_id: @post.id, votable_type: Post)
+    redirect_to post_url(@post)
   end
 
   private
