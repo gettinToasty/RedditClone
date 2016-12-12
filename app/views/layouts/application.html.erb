@@ -11,6 +11,7 @@
   <body>
     <header>
       <% if current_user %>
+        <%= link_to current_user.username, user_url(current_user) %>
         <%= button_to "Log out", session_url(current_user), method: :delete %>
       <% else %>
         <%= link_to "Log in", new_session_url %>

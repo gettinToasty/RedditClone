@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :subs,
     foreign_key: :moderator_id,
     primary_key: :id,
-    class_name: :sub
+    class_name: :Sub
 
   has_many :modded_posts,
     through: :subs,
@@ -17,6 +17,10 @@ class User < ApplicationRecord
   has_many :posts,
     foreign_key: :author_id,
     class_name: :Post
+
+  has_many :votes,
+    through: :posts,
+    source: :votes
 
   has_many :comments,
     foreign_key: :author_id
