@@ -17,7 +17,7 @@
 <br>
 <br>
 <% if current_user == @sub.moderator %>
-  <%= link_to "Edit sub", edit_sub_url(@sub) %>
+  <%= link_to "Edit sub", edit_sub_url(@sub), class: "button-link" %>
 <% end %>
 <br>
 <%= link_to 'Back to index', root_url %>

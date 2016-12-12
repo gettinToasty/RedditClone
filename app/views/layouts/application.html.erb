@@ -9,13 +9,19 @@
   </head>
 
   <body>
+    <div id="flash">
+      <% if flash[:errors] %>
+      <p id="flash-text"><%= flash[:errors].join(", ") %></p>
+      <% end %>
+    </div>
+
     <header>
       <% if current_user %>
         <%= link_to current_user.username, user_url(current_user) %>
         <%= button_to "Log out", session_url(current_user), method: :delete %>
       <% else %>
-        <%= link_to "Log in", new_session_url %>
-        <%= link_to "Register", new_user_url %>
+        <%= link_to "Log in", new_session_url, class: "button-link" %>
+        <%= link_to "Register", new_user_url, class: "button-link" %>
       <% end %>
     </header>
 

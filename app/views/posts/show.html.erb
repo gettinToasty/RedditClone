@@ -13,7 +13,7 @@
 <p><%= @post.content %></p>
 <br>
 <% if current_user == @post.author || current_user == @post.moderator %>
-  <%= link_to "Edit Post", edit_post_url(@post) %>
+  <%= link_to "Edit Post", edit_post_url(@post), class: "button-link" %>
 <% end %>
 
 <br><br>
@@ -23,7 +23,7 @@
 <% end %>
 
 <br>
-  <%= link_to "Add comment", new_post_comment_url(@post) %>
+  <%= link_to "Add comment", new_post_comment_url(@post), class: "button-link" %>
 <br>
 
 <% @all_comments[nil].each do |comment| %>
